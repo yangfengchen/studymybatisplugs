@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ddzj.studymybatisplugs.mapper.TblUserMapper">
+
+
+
+    <select id="findByName" parameterType="java.lang.String" resultType="com.ddzj.studymybatisplugs.entity.TblUser">
+        select * from tbl_user where name=#{name}
+    </select>
+
+    <select id="findByAccount" parameterType="java.lang.String"
+            resultType="com.ddzj.studymybatisplugs.dto.UserRole">
+        select t.id, t.account, t.name,t.alias_Name as aliasName, t2.code as roleCode, t2.name as roleCodeName
+        from tbl_user t, tbl_user_role t1, tbl_role t2
+        where t.account=#{account}
+         and t.account = t1.account and t1.role_code = t2.code
+    </select>
+
+    <select id="findMapByAccount" parameterType="java.lang.String"
+            resultType="java.util.Map">
+        select t.id, t.account, t.name,t.alias_Name as aliasName, t2.code as roleCode, t2.name as roleCodeName
+        from tbl_user t, tbl_user_role t1, tbl_role t2
+        where t.account=#{account}
+          and t.account = t1.account and t1.role_code = t2.code
+    </select>
+
+    <select id="findByQueryUserDto" parameterType="com.ddzj.studymybatisplugs.dto.QueryUserDto"
+            resultType="com.ddzj.studymybatisplugs.entity.TblUser">
+        select * from tbl_user t
+        <where>
+            <if test="account != null">
+               and t.account=#{account}
+            </if>
+        </where>
+    </select>
+
+    <select id="queryPageByQueryUserDto" resultType="com.ddzj.studymybatisplugs.entity.TblUser">
+        select * from tbl_user t
+        <where>
+            <if test="queryUserDto.account != null and queryUserDto.account != ''">
+                and t.account=#{queryUserDto.account}
+            </if>
+        </where>
+    </select>
+
+</mapper>
