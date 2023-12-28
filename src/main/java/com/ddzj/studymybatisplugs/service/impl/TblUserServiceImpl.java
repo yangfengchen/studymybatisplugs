@@ -43,4 +43,9 @@ public class TblUserServiceImpl extends ServiceImpl<TblUserMapper, TblUser> impl
     public IPage<TblUser> queryPageByQueryUserDto(IPage<?> page, QueryUserDto queryUserDto) {
         return this.baseMapper.queryPageByQueryUserDto(page, queryUserDto);
     }
+
+    @Override
+    public void saveCustomBatch(List<TblUser> list) {
+        this.baseMapper.saveCustomBatch(list);
+    }
 }

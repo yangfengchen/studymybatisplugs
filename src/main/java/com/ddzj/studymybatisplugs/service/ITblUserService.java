@@ -46,4 +46,9 @@ public interface ITblUserService extends IService<TblUser> {
      * @return
      */
     IPage<TblUser> queryPageByQueryUserDto(IPage<?> page, QueryUserDto queryUserDto);
+
+    /**
+     * 批量保存数据
+     */
+    void saveCustomBatch(List<TblUser> list);
 }

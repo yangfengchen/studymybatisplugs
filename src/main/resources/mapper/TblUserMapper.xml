@@ -43,4 +43,13 @@
         </where>
     </select>
 
+    <insert id="saveCustomBatch">
+        insert into tbl_user(id, account, name, email, age, phone, alias_Name)
+        values 
+            <foreach collection="list" item="item" separator=",">
+                (#{item.id},#{item.account},#{item.name},#{item.email},#{item.age},#{item.phone},#{item.aliasName})
+            </foreach>
+    </insert>
+
+
 </mapper>
